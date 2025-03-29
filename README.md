@@ -21,6 +21,9 @@
     <li>This app was supposed to be build with <a href="https://gitlab.gnome.org/GNOME/libadwaita">libadw</a> but i noticed too late that Glade only exports GTK3 compatible XML. I might port this to GTK4 on a separate branch when i have more free time.</li>
   </ul>
   <h2>Screeshots</h2>
-  <p>todo.</p>
+  <img align="right" height="600px" src="https://github.com/user-attachments/assets/65d372da-2371-43eb-90f1-25a62b7d8ffd"></img>
+  <img align="left" height="300px" src="https://github.com/user-attachments/assets/4cf7a3b6-fed5-45b5-928a-daf1738653fb"></img>
+  <br> <br>
+  <img align="left" height="300px" src="https://github.com/user-attachments/assets/cf25669c-9aac-48f1-8ade-fc749c498a29"></img>
   </div>
 </div>

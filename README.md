@@ -17,7 +17,7 @@
   <h2>Additional</h2>
   <ul>
     <li>Install depedencies: <code>pip install pygobject feedparser</code>;</li>
-    <li>I made this project so i could learn the ins & outs of GTK & other UI frameworks, but i also want to port this to android, so a port will come in the near future.</li>
+    <li>I made this project so i could learn the ins & outs of GTK & other UI frameworks, i also want to port this to android in the near future to learn more about flutter</li>
   </ul>
   <h2>Screeshots</h2>
   <p>todo.</p>

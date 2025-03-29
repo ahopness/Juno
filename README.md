@@ -1,5 +1,5 @@
 <div align="center">
-  <img align="center" src="https://github.com/user-attachments/assets/45f609fe-3b3b-4935-a97c-88004af9362c"></img>
+  <img align="center" src="https://github.com/user-attachments/assets/ecd79ed6-311e-45e7-abbb-a16822ec4f68"></img>
   <hr>
   <div align="left">
     <a>Social media app, made for research. </a>
@@ -11,7 +11,8 @@
       <li>Scripted in Python for learning reasons;</li>
       <li>RSS Feeds loaded with <a href="https://pypi.org/project/feedparser/">feedparser</a>;</li>
       <li><i><a href="https://github.com/ahopness/Juno/tree/gtk">gtk</a></i> branch is built for desktop with <a href="https://pygobject.gnome.org/">PyGObject</a>.</li>
-      <li><i>UI built with <a href="https://glade.gnome.org/">Glade</a>.</li>
+      <li><i>(comming soon)</i> flutter branch.</li>
+      <li>UI built with <a href="https://glade.gnome.org/">Glade</a>.</li>
     </ul>
   <h2>Additional</h2>
   <ul>

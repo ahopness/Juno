@@ -49,43 +49,6 @@ class Application(Gtk.Application):
         self.header_bar = builder.get_object("headerbar")
         self.add_window(self.window)
         self.window.present()
-
-    """ (not thread safe)
-    def load_website(self, website):
-        t = threading.Thread(target=self._load_website, args=[website])
-        t.start()
-    def _load_website(self, website):
-        self.page_stack.set_visible_child_name("loading")
-        self.status_bar.set_label(f"Loading {website.website_name} ...")
-        self.window.set_title(f"Juno @ {website.website_name}")
-
-        # make feed
-        for child in self.feed.get_children(): self.feed.remove(child)
-
-        self.loading_text.set_label("Loading RSS")
-        self.feed_data = website.get_rss_feed()
-
-        self.loading_text.set_label("Fetching data")
-        for post_data in self.feed_data:
-            post_builder = Gtk.Builder()
-            post_builder.add_from_file(self.glade_file)
-
-            post_object = post_builder.get_object("post")
-            post_title = post_builder.get_object("post_title")
-            post_link = post_builder.get_object("post_link")
-            post_author = post_builder.get_object("post_author")
-            
-            post_title.set_label(post_data.title)
-            post_link.set_label(post_data.link)
-            post_author.set_label("by " + post_data.author)
-
-            post_object.connect("clicked", self._on_post_clicked)
-
-            self.feed.add(post_object)
-        
-        self.page_stack.set_visible_child_name("feed")
-        self.status_bar.set_label("Ready!")
-    """
     
     def load_website(self, website):
         self.page_stack.set_visible_child_name("loading")

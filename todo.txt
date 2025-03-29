@@ -2,5 +2,3 @@
 [x] open links
 [x] refresh button & app icon
 [x] comments
-[ ] rewrite threading with syncio
-[ ] custom RSS links

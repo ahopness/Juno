@@ -1,0 +1,6 @@
+[ ] concertar o threadind e os segfaults
+[ ] usar alguma coisa de icone
+[ ] abrir os links no navegador
+[ ] botão de refresh
+[ ] css
+[ ] favoritos

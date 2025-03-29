@@ -1,6 +1,6 @@
 [x] fix thread safety
 [x] open links
-[ ] refresh button
-[ ] css & app icon
-[ ] favotites
+[x] refresh button & app icon
+[x] comments
+[ ] rewrite threading with syncio
 [ ] custom RSS links

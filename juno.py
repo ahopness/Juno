@@ -31,10 +31,7 @@ class Application(Gtk.Application):
 
         # page stack
         self.page_stack = builder.get_object("page_stack")
-
-        # loading indicators
         self.loading_text = builder.get_object("loading_text")
-        self.status_bar = builder.get_object("status_bar")
 
         # actions
         self.refesh_button = builder.get_object("refresh")
@@ -49,6 +46,7 @@ class Application(Gtk.Application):
 
         # windowing
         self.window = builder.get_object("window_main")
+        self.header_bar = builder.get_object("headerbar")
         self.add_window(self.window)
         self.window.present()
 
@@ -91,8 +89,8 @@ class Application(Gtk.Application):
     
     def load_website(self, website):
         self.page_stack.set_visible_child_name("loading")
-        self.status_bar.set_label(f"Loading {website.website_name} ...")
-        self.window.set_title(f"Juno @ {website.website_name}")
+        self.header_bar.set_title("Juno")
+        self.header_bar.set_subtitle(website.website_name)
         self.loading_text.set_label("Loading RSS")
         
         t = threading.Thread(target=self._fetch_website_data, args=[website])
@@ -107,28 +105,24 @@ class Application(Gtk.Application):
         self.loading_text.set_label("Updating feed")
         
         for child in self.feed.get_children(): self.feed.remove(child)
-        
+                    
+
         for post_data in feed_data:
             post_builder = Gtk.Builder()
             post_builder.add_from_file(self.glade_file)
 
-            post_object = post_builder.get_object("post")
-            post_title = post_builder.get_object("post_title")
-            post_link = post_builder.get_object("post_link")
-            post_author = post_builder.get_object("post_author")
-            
-            post_title.set_label(post_data.title)
-            post_link.set_label(post_data.link)
-            post_author.set_label("by " + post_data.author)
+            post_builder.get_object("post_title").set_label(post_data.title)
+            post_builder.get_object("post_link").set_label(post_data.link)
+            post_builder.get_object("post_author").set_label("by " + post_data.author)
 
             def button_clicked_callback(title, link):
                 return lambda pst: self._on_post_clicked(title, link)
-            post_object.connect("clicked", button_clicked_callback(post_data.title, post_data.link))
+            post_builder.get_object("post_website").connect("clicked", button_clicked_callback(post_data.title, post_data.link))
+            post_builder.get_object("post_comments").connect("clicked", button_clicked_callback(f"Comments of \'{post_data.title}\'", post_data.comments))
 
-            self.feed.add(post_object)
+            self.feed.add(post_builder.get_object("post"))
         
         self.page_stack.set_visible_child_name("feed")
-        self.status_bar.set_label("Ready!")
         
         # prevent this function from being called again
         return False

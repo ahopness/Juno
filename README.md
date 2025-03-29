@@ -2,7 +2,7 @@
   <img align="center" src="https://github.com/user-attachments/assets/ecd79ed6-311e-45e7-abbb-a16822ec4f68"></img>
   <hr>
   <div align="left">
-    <a>Social media app, made for research. </a>
+    <a>Link aggregation social media app, made for research.</a>
     <br>
     <a>Inpired by Gnome Circle & Linux Mint apps.</a>
     <br>
@@ -17,7 +17,7 @@
   <h2>Additional</h2>
   <ul>
     <li>Install depedencies: <code>pip install pygobject feedparser</code>;</li>
-    <li>I made this project so i could learn the ins & outs of GTK & other UI frameworks, i also want to port this to android in the near future to learn more about flutter</li>
+    <li>I made this project so i could learn the ins & outs of GTK & other UI frameworks, i also want to port this to android in the near future to learn more about flutter.</li>
   </ul>
   <h2>Screeshots</h2>
   <p>todo.</p>

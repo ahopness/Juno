@@ -48,6 +48,7 @@ class Application(Gtk.Application):
         self.add_window(self.window)
         self.window.present()
 
+    """ (not thread safe)
     def load_website(self, website):
         t = threading.Thread(target=self._load_website, args=[website])
         t.start()
@@ -82,6 +83,49 @@ class Application(Gtk.Application):
         
         self.page_stack.set_visible_child_name("feed")
         self.status_bar.set_label("Ready!")
+    """
+    
+    def load_website(self, website):
+        self.page_stack.set_visible_child_name("loading")
+        self.status_bar.set_label(f"Loading {website.website_name} ...")
+        self.window.set_title(f"Juno @ {website.website_name}")
+        self.loading_text.set_label("Loading RSS")
+        
+        t = threading.Thread(target=self._fetch_website_data, args=[website])
+        t.daemon = True
+        t.start()
+
+    def _fetch_website_data(self, website):
+        feed_data = website.get_rss_feed()
+
+        GLib.idle_add(self._update_ui_with_feed_data, website, feed_data)
+    def _update_ui_with_feed_data(self, website, feed_data):
+        self.loading_text.set_label("Updating feed")
+        
+        for child in self.feed.get_children(): self.feed.remove(child)
+        
+        for post_data in feed_data:
+            post_builder = Gtk.Builder()
+            post_builder.add_from_file(self.glade_file)
+
+            post_object = post_builder.get_object("post")
+            post_title = post_builder.get_object("post_title")
+            post_link = post_builder.get_object("post_link")
+            post_author = post_builder.get_object("post_author")
+            
+            post_title.set_label(post_data.title)
+            post_link.set_label(post_data.link)
+            post_author.set_label("by " + post_data.author)
+
+            post_object.connect("clicked", self._on_post_clicked)
+
+            self.feed.add(post_object)
+        
+        self.page_stack.set_visible_child_name("feed")
+        self.status_bar.set_label("Ready!")
+        
+        # prevent this function from being called again
+        return False
     
     def _on_post_clicked(self, button):
         print(f"clicked")

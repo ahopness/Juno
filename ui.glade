@@ -28,6 +28,7 @@ Author: Lucas Ângelo Câmara da Silva
 -->
 <interface>
   <requires lib="gtk+" version="3.24"/>
+  <requires lib="webkit2gtk" version="2.28"/>
   <!-- interface-license-type mit -->
   <!-- interface-name Juno -->
   <!-- interface-description Link agregation social media app. Made for research. -->
@@ -93,7 +94,7 @@ Author: Lucas Ângelo Câmara da Silva
             </child>
           </object>
           <packing>
-            <property name="expand">False</property>
+            <property name="expand">True</property>
             <property name="fill">True</property>
             <property name="position">0</property>
           </packing>
@@ -143,7 +144,7 @@ Author: Lucas Ângelo Câmara da Silva
       </object>
     </child>
   </object>
-  <object class="GtkApplicationWindow" id="window">
+  <object class="GtkApplicationWindow" id="window_main">
     <property name="can-focus">False</property>
     <property name="title" translatable="yes">Juno</property>
     <property name="resizable">False</property>
@@ -313,6 +314,74 @@ Author: Lucas Ângelo Câmara da Silva
             <property name="pack-type">end</property>
             <property name="position">1</property>
           </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkApplicationWindow" id="window_webview">
+    <property name="can-focus">False</property>
+    <property name="window-position">center</property>
+    <property name="default-width">1024</property>
+    <property name="default-height">512</property>
+    <child>
+      <object class="WebKitWebView" type-func="webkit_web_view_get_type" id="webview">
+        <property name="visible">True</property>
+        <property name="can-focus">True</property>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
+    </child>
+    <child type="titlebar">
+      <object class="GtkHeaderBar" id="webview_headerbar">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="title" translatable="yes">(title)</property>
+        <property name="subtitle" translatable="yes">(link)</property>
+        <property name="show-close-button">True</property>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <child>
+              <object class="GtkSpinner" id="webview_spinner">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="active">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="webview_copy">
+                <property name="label" translatable="yes">Copy Link</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="webview_browser">
+                <property name="label" translatable="yes">Open in Browser</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+          </object>
         </child>
       </object>
     </child>

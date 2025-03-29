@@ -1,5 +1,5 @@
 [x] fix thread safety
-[ ] open links
+[x] open links
 [ ] refresh button
 [ ] css & app icon
 [ ] favotites

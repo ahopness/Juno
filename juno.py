@@ -1,10 +1,14 @@
 import os
 import sys
 import threading
+import subprocess
 
 import gi
 gi.require_version("Gtk", "3.0")
-from gi.repository import GLib, Gtk
+gi.require_version("Gdk", "3.0")
+gi.require_version('WebKit2', '4.1')
+from gi.repository import GLib, Gdk, Gtk, WebKit2
+from gi.repository.WebKit2 import WebView, Settings
 
 from websites import * 
 
@@ -44,7 +48,7 @@ class Application(Gtk.Application):
         self.post = builder.get_object("post")
 
         # windowing
-        self.window = builder.get_object("window")
+        self.window = builder.get_object("window_main")
         self.add_window(self.window)
         self.window.present()
 
@@ -117,7 +121,9 @@ class Application(Gtk.Application):
             post_link.set_label(post_data.link)
             post_author.set_label("by " + post_data.author)
 
-            post_object.connect("clicked", self._on_post_clicked)
+            def button_clicked_callback(title, link):
+                return lambda pst: self._on_post_clicked(title, link)
+            post_object.connect("clicked", button_clicked_callback(post_data.title, post_data.link))
 
             self.feed.add(post_object)
         
@@ -127,8 +133,34 @@ class Application(Gtk.Application):
         # prevent this function from being called again
         return False
     
-    def _on_post_clicked(self, button):
-        print(f"clicked")
+    def _on_post_clicked(self, title, link):
+        webview_builder = Gtk.Builder()
+        webview_builder.add_from_file(self.glade_file)
+        
+        webview_builder.get_object("webview_headerbar").set_title(title)
+        webview_builder.get_object("webview_headerbar").set_subtitle(link)
+        
+        webview_builder.get_object("webview_copy").connect("clicked", lambda cp: Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD).set_text(link, -1))
+        webview_builder.get_object("webview_browser").connect("clicked", lambda br: self._open_link_in_browser(link))
+        
+        webview = webview_builder.get_object("webview")
+        webview.load_uri(link)
+
+        def _handle_loading(self, event):
+            if event == WebKit2.LoadEvent.FINISHED:
+                webview_builder.get_object("webview_spinner").stop()
+        webview.connect("load-changed", _handle_loading)
+
+        webview_window = webview_builder.get_object("window_webview")
+        self.add_window(webview_window)
+        webview_window.present()
+    def _open_link_in_browser(self, link):
+        if sys.platform == 'win32':
+            os.startfile(link)  # Windows
+        elif sys.platform == 'darwin':
+            subprocess.run(['open', link])  # macOS
+        else:
+            subprocess.run(['xdg-open', link])  # Linux/Unix
 
 if __name__ == "__main__":
     app = Application()

@@ -1,30 +1,17 @@
-This is the GTK4 branch, it's experimental and you might need to to intall `gir1.2-webkit-6.0` via your package manager to be run this project
-
----
-
 <div align="center">
   <img align="center" src="https://github.com/user-attachments/assets/ecd79ed6-311e-45e7-abbb-a16822ec4f68"></img>
   <hr>
   <div align="left">
     <a>Link aggregation social media app (a.k.a. basic RSS client), made for research.</a>
     <br>
-    <a>Inpired by Gnome Circle & Linux Mint apps.</a>
+    <b>- THE GTK4 BRANCH -</b>
     <br>
     <h2>Technicals</h2>
     <ul>
-      <li>Scripted in Python for learning reasons;</li>
-      <li>RSS feeds loaded with <a href="https://pypi.org/project/feedparser/">feedparser</a>;</li>
-      <li><i><a href="https://github.com/ahopness/Juno/tree/gtk">gtk</a></i> branch is built for desktop with <a href="https://pygobject.gnome.org/">PyGObject</a>.</li>
-      <li><i>(comming soon)</i> flutter branch.</li>
-      <li>UI built with <a href="https://glade.gnome.org/">Glade</a>.</li>
+      <li>The UI this time was built with <a href="https://gitlab.gnome.org/jpu/cambalache">Cambalache</a>, which felt like a toned down version of Glade, the UX isn't that great and i had to manually port all the Widgets one by one, if this was a large project that would defnetly be a hastle;</li>
+      <li>I tried to use libadw to this project but some widgets were desmostrating wierd behaviour so i just gave up + aparently i had to update the gtk packages in my OS to use gtk-4.16 but i couldn't figure out how to do it;</li>
+      <li>I also had some issues but Webkit versioning, <a href="https://webkitgtk.org/reference/webkit2gtk/2.39.7/migrating-to-webkitgtk-6.0.html">version 6.0 isn't installed by default on most systems</a>, which makes the portability of the app less efficient;</li>
+      <li>My final veredict of this failed atempt is that i'll think twice before programming any app with GTK4 and ADW, since GTK3 support is still wide-spread and dealing with the dated API calls aren't that stressfull at all.</li>
     </ul>
-  <h2>Additional</h2>
-  <ul>
-    <li>Install depedencies: <code>pip install pygobject feedparser</code>;</li>
-    <li>I made this project so i could learn the ins & outs of GTK & other UI frameworks, i also want to port this to flutter in the near future to learn more about mobile dev.</li>
-    <li>This app was supposed to be build with <a href="https://gitlab.gnome.org/GNOME/libadwaita">libadw</a> but i noticed too late that Glade only exports GTK3 compatible XML. I might port this to GTK4 on a separate branch when i have more free time.</li>
-  </ul>
-  <h2>Screeshots</h2>
-  <p>todo.</p>
   </div>
 </div>

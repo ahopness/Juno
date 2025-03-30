@@ -4,11 +4,11 @@ import threading
 import subprocess
 
 import gi
-gi.require_version("Gtk", "3.0")
-gi.require_version("Gdk", "3.0")
-gi.require_version('WebKit2', '4.1')
-from gi.repository import GLib, Gdk, Gtk, WebKit2
-from gi.repository.WebKit2 import WebView, Settings
+gi.require_version("Gtk", "4.12")
+gi.require_version("Gdk", "4.0")
+gi.require_version('WebKit', '6.0')
+from gi.repository import GLib, Gdk, Gtk, WebKit
+from gi.repository.WebKit import WebView, Settings
 
 from websites import * 
 
@@ -17,7 +17,7 @@ class Application(Gtk.Application):
         super().__init__(application_id="com.ahopness.juno")
         GLib.set_application_name("juno")
 
-        self.glade_file = os.path.dirname(os.path.abspath(__file__)) + '/ui.glade'
+        self.glade_file = os.path.dirname(os.path.abspath(__file__)) + '/juno.ui'
         self.window = None
 
     def do_activate(self):
@@ -36,9 +36,9 @@ class Application(Gtk.Application):
         # actions
         self.refesh_button = builder.get_object("refresh")
         self.refesh_button.connect("clicked", lambda refersh: self.load_website(current_website))
-        builder.get_object("gamedevcity").connect("activate", lambda gdc: self.load_website(website_list[0]))
-        builder.get_object("lobsters").connect("activate", lambda lob: self.load_website(website_list[1]))
-        builder.get_object("hackernews").connect("activate", lambda hkr: self.load_website(website_list[2]))
+        #builder.get_object("gamedevcity").connect("activate", lambda gdc: self.load_website(website_list[0]))
+        #builder.get_object("lobsters").connect("activate", lambda lob: self.load_website(website_list[1]))
+        #builder.get_object("hackernews").connect("activate", lambda hkr: self.load_website(website_list[2]))
 
         # feed
         self.feed = builder.get_object("feed")
@@ -46,14 +46,13 @@ class Application(Gtk.Application):
 
         # windowing
         self.window = builder.get_object("window_main")
-        self.header_bar = builder.get_object("headerbar")
+        self.main_header_subtitle = builder.get_object("main_window_subtitle")
         self.add_window(self.window)
         self.window.present()
     
     def load_website(self, website):
         self.page_stack.set_visible_child_name("loading")
-        self.header_bar.set_title("Juno")
-        self.header_bar.set_subtitle(website.website_name)
+        self.main_header_subtitle.set_label(website.website_name)
         self.loading_text.set_label("Loading RSS")
         
         t = threading.Thread(target=self._fetch_website_data, args=[website])
@@ -63,12 +62,12 @@ class Application(Gtk.Application):
     def _fetch_website_data(self, website):
         feed_data = website.get_rss_feed()
 
-        GLib.idle_add(self._update_ui_with_feed_data, website, feed_data)
+        GLib.idle_add(self._update_ui_with_feed_data, website, feed_data, priority=GLib.PRIORITY_DEFAULT_IDLE)
     def _update_ui_with_feed_data(self, website, feed_data):
         self.loading_text.set_label("Updating feed")
         
-        for child in self.feed.get_children(): self.feed.remove(child)
-                    
+        self.feed.remove_all()
+        #for child in self.feed.get_children(): self.feed.remove(child)
 
         for post_data in feed_data:
             post_builder = Gtk.Builder()
@@ -94,10 +93,11 @@ class Application(Gtk.Application):
         webview_builder = Gtk.Builder()
         webview_builder.add_from_file(self.glade_file)
         
-        webview_builder.get_object("webview_headerbar").set_title(title)
-        webview_builder.get_object("webview_headerbar").set_subtitle(link)
+        webview_builder.get_object("webview_window_title").set_label(title)
+        webview_builder.get_object("webview_window_subtitle").set_label(link)
         
-        webview_builder.get_object("webview_copy").connect("clicked", lambda cp: Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD).set_text(link, -1))
+        webview_builder.get_object("webview_copy").connect("clicked", lambda cp: Gdk.Display.get_clipboard(Gdk.Display.get_default().set(link)))
+
         webview_builder.get_object("webview_browser").connect("clicked", lambda br: self._open_link_in_browser(link))
         
         webview = webview_builder.get_object("webview")

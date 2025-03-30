@@ -1,0 +1,202 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.94.1 -->
+<interface>
+  <!-- interface-name juno.ui -->
+  <requires lib="gtk" version="4.12"/>
+  <requires lib="webkitgtk" version="6.0"/>
+  <requires lib="gio" version="2.0"/>
+  <object class="GtkBox" id="post">
+    <property name="spacing">4</property>
+    <child>
+      <object class="GtkButton" id="post_website">
+        <property name="hexpand">True</property>
+        <child>
+          <object class="GtkBox">
+            <property name="orientation">vertical</property>
+            <property name="spacing">3</property>
+            <child>
+              <object class="GtkLabel" id="post_title">
+                <property name="halign">start</property>
+                <property name="label">(title)</property>
+                <property name="wrap">True</property>
+                <property name="wrap-mode">word-char</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel" id="post_author">
+                <property name="halign">start</property>
+                <property name="label">(author)</property>
+                <property name="opacity">0.5</property>
+                <property name="wrap">True</property>
+                <property name="wrap-mode">word-char</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel" id="post_link">
+                <property name="halign">start</property>
+                <property name="label">(link)</property>
+                <property name="opacity">0.25</property>
+                <property name="wrap">True</property>
+                <property name="wrap-mode">word-char</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkButton" id="post_comments">
+        <property name="has-tooltip">True</property>
+        <property name="icon-name">help-faq</property>
+        <property name="tooltip-text">Open comments</property>
+      </object>
+    </child>
+  </object>
+  <object class="GtkApplicationWindow" id="window_main">
+    <property name="child">
+      <object class="GtkStack" id="page_stack">
+        <property name="transition-type">slide-up</property>
+        <child>
+          <object class="GtkStackPage" id="page_loading">
+            <property name="child">
+              <object class="GtkBox">
+                <property name="orientation">vertical</property>
+                <property name="spacing">4</property>
+                <property name="valign">center</property>
+                <child>
+                  <object class="GtkSpinner">
+                    <property name="spinning">True</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="loading_text">
+                    <property name="label">(loading state)</property>
+                  </object>
+                </child>
+              </object>
+            </property>
+            <property name="name">loading</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkStackPage" id="page_feed">
+            <property name="child">
+              <object class="GtkScrolledWindow">
+                <property name="child">
+                  <object class="GtkViewport">
+                    <property name="child">
+                      <object class="GtkFlowBox" id="feed">
+                        <property name="orientation">vertical</property>
+                      </object>
+                    </property>
+                  </object>
+                </property>
+              </object>
+            </property>
+            <property name="name">feed</property>
+          </object>
+        </child>
+      </object>
+    </property>
+    <property name="default-height">600</property>
+    <property name="default-width">450</property>
+    <property name="resizable">False</property>
+    <property name="titlebar">
+      <object class="GtkHeaderBar">
+        <property name="title-widget">
+          <object class="GtkBox">
+            <child>
+              <object class="GtkMenuButton" id="website_options">
+                <property name="halign">start</property>
+                <property name="label">Choose Website</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton" id="refresh">
+                <property name="halign">start</property>
+                <property name="has-tooltip">True</property>
+                <property name="icon-name">view-refresh</property>
+                <property name="tooltip-text">Refresh feed</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkLabel" id="main_window_title">
+                    <property name="label">Juno</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="main_window_subtitle">
+                    <property name="label">gamedev.city</property>
+                    <property name="opacity">0.5</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </property>
+      </object>
+    </property>
+  </object>
+  <object class="GtkApplicationWindow" id="window_webview">
+    <property name="child">
+      <object class="WebKitWebView" id="webview"/>
+    </property>
+    <property name="default-height">512</property>
+    <property name="default-width">1024</property>
+    <property name="titlebar">
+      <object class="GtkHeaderBar">
+        <property name="title-widget">
+          <object class="GtkBox">
+            <property name="hexpand">True</property>
+            <property name="spacing">8</property>
+            <child>
+              <object class="GtkButton" id="webview_browser">
+                <property name="label">Open in Browser</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton" id="webview_copy">
+                <property name="icon-name">edit-copy</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkSpinner" id="webview_spinner">
+                <property name="spinning">True</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkLabel" id="webview_window_title">
+                    <property name="label">Webpage</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="webview_window_subtitle">
+                    <property name="label">Link</property>
+                    <property name="opacity">0.5</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </property>
+      </object>
+    </property>
+  </object>
+  <menu id="website_options_menu">
+    <item>
+      <attribute name="label">gamedev.city</attribute>
+    </item>
+    <item>
+      <attribute name="label">hacker-news</attribute>
+    </item>
+    <item>
+      <attribute name="label">lobste.rs</attribute>
+    </item>
+  </menu>
+</interface>

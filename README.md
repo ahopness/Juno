@@ -1,3 +1,7 @@
+This is the GTK4 branch, it's experimental and you might need to to intall `gir1.2-webkit-6.0` via your package manager to be run this project
+
+---
+
 <div align="center">
   <img align="center" src="https://github.com/user-attachments/assets/ecd79ed6-311e-45e7-abbb-a16822ec4f68"></img>
   <hr>

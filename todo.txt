@@ -1,4 +1,0 @@
-[x] fix thread safety
-[x] open links
-[x] refresh button & app icon
-[x] comments

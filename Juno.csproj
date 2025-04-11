@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <Optimize>true</Optimize>
+    <PublishTrimmed>false</PublishTrimmed>
+    <PublishSingleFile>true</PublishSingleFile>
+    <SelfContained>true</SelfContained>
+    <PublishReadyToRun>true</PublishReadyToRun>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="ui.glade"> <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory> </None>
+    <None Update="icon.png"> <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory> </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GtkSharp" Version="3.24.24.*" />
+    <PackageReference Include="System.ServiceModel.Syndication" Version="9.0.4" />
+    <PackageReference Include="WebkitGtkSharp" Version="3.24.24.95" />
+  </ItemGroup>
+
+</Project>

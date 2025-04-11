@@ -4,7 +4,7 @@
   <div align="left">
     <a>Link aggregation social media app (a.k.a. basic RSS client), made for research.</a>
     <br>
-    <b>- THE GTK4 BRANCH -</b>
+    <b>- THE PYTHON GTK4 BRANCH -</b>
     <br>
     <h2>Technicals</h2>
     <ul>

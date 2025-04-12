@@ -35,7 +35,7 @@ namespace Juno
         public static Website[] websiteList = {new Website("gamedev.city"),new Website("lobste.rs"), new Website("hnrss.org", @"https://hnrss.org/frontpage")};
         public static Website currentWebsite = websiteList[0];
 
-        public static Gtk.Application app = new Gtk.Application("org.Ahopness.Juno", GLib.ApplicationFlags.None);
+        public static Gtk.Application app = new Gtk.Application("dev.lucasangelo.juno", GLib.ApplicationFlags.None);
         public static Gtk.Builder builderMain = new Gtk.Builder();
 
         [STAThread]
@@ -82,7 +82,6 @@ namespace Juno
             {
                 ((Gtk.Label)builderMain.GetObject("loading_text")).Text = "Failed to load feed\n(" + e.Message +")";
             }
-            
         }
 
         static void _UpdateFeed(Website website, SyndicationFeed feed)
@@ -105,8 +104,7 @@ namespace Juno
                 ((Gtk.Label)builderPost.GetObject("post_author")).Text = "by " + postData.Authors[0].Name;
 
                 ((Gtk.Button)builderPost.GetObject("post_website")).Clicked += (object sender, EventArgs a) => { _OpenURL( postData.Title.Text, postData.Links[0].Uri.ToString() ); };
-                // TOOD: Encontrar aonde q ta o link desas joça
-                //((Gtk.Button)builderPost.GetObject("post_comments")).Clicked += (object sender, EventArgs a) => { _OpenURL( ( "Comments of " + postData.Title.Text ), postData.Links[0].Uri.ToString() ); };
+                ((Gtk.Button)builderPost.GetObject("post_comments")).Clicked += (object sender, EventArgs a) => { _OpenURL( ( "Comments of " + postData.Title.Text ), postData.ElementExtensions.ReadElementExtensions<string>("comments", "")[0] ); };
             
                 Application.Invoke( (object sender, EventArgs e) => { ((Gtk.FlowBox)builderMain.GetObject("feed")).Add((Gtk.Box)builderPost.GetObject("post")); } );
             }

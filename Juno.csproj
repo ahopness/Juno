@@ -1,27 +1,27 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <Optimize>true</Optimize>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <Optimization>true</Optimization>
     <PublishTrimmed>false</PublishTrimmed>
     <PublishSingleFile>true</PublishSingleFile>
     <SelfContained>true</SelfContained>
-    <PublishReadyToRun>true</PublishReadyToRun>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="ui.glade"> <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory> </None>
-    <None Update="icon.png"> <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory> </None>
+    <PackageReference Include="Avalonia" Version="11.2.6" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.2.6" />
+    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.2.6" />
+    
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.6" />
+    
+    <ProjectReference Include="../avalonia-aero-theme/src/AvaloniaAero/AvaloniaAero.csproj" />
+    
+    <PackageReference Include="CodeHollow.FeedReader" Version="1.2.6" />
+    <PackageReference Include="WebViewControl-Avalonia" Version="3.120.9" />
   </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="GtkSharp" Version="3.24.24.*" />
-    <PackageReference Include="WebkitGtkSharp" Version="3.24.24.95" />
-    <PackageReference Include="System.ServiceModel.Syndication" Version="9.0.4" />
-  </ItemGroup>
-
 </Project>

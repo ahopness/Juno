@@ -16,7 +16,7 @@
       <li><i><a href="https://github.com/ahopness/Juno/tree/csharp-avalonia">C# + AvaloniaUI + CEF (via  WebView)</a></i> branch, port of the previous branch to other UI & WebView frameworks, sucessful, works well, only a bit too heavy on storage.</li>
       <li><i>(comming soon)</i> flutter branch.</li>
     </ul>
-  <h2>Screeshots</h2>
+  <h2>Screenshots</h2>
   <img align="center" src="https://github.com/user-attachments/assets/32c9d6e0-051e-4ca6-ba2e-ca5ee9428ef5"></img>
   <img align="center" src="https://github.com/user-attachments/assets/2bd311bd-4910-413c-be4f-908d97411fbe"></img>
   <img align="center" src="https://github.com/user-attachments/assets/361e4e3d-8390-4d3b-9067-fe95145327ab"></img>
